@@ -1,6 +1,6 @@
 import io;
 
 
-fn main(argc: int, argv: array<char>) -> int {
-    print("hello world!");
+fn main(argc: int, argv: list<str>) -> int {
+    print("hello world!\n");
 };

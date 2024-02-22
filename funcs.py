@@ -31,7 +31,7 @@ def showError(file, text, symno, error):
     col, row = getSymPos(text, symno)
     line = text.split("\n")[row]
     print("error in file", repr(os.path.abspath(file)) + ", line", row)
-    print("\t", line)
-    print("~" * (col + 3) + "^")
+    print("    ", line)
+    print("~" * (col + 5) + "^")
     print(error)
-    sys.exit(1)
+    sys.exit()

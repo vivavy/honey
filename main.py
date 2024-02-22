@@ -12,7 +12,7 @@ infile = sys.argv[-1]
 with open(infile, "rt") as f:
     src = f.read()
 
-rules = (
+lxrules = (
     (r"\/\*[^(\*\/)\*\/]", 'COMM'),
     (r'".*"', 'STR'),
     (r"\d+", 'NUM'),
@@ -21,8 +21,8 @@ rules = (
     (r"\b[A-Za-z_]\w*\b", 'NAME'),
     (r"\(", 'LN'),
     (r"\)", 'RN'),
-    (r"\<-", 'RAR'),
-    (r"-\>", 'LAR'),
+    (r"\<-", 'LAR'),
+    (r"-\>", 'RAR'),
     (r"\<", 'LA'),
     (r"\>", 'RA'),
     (r";", 'SCOL'),
@@ -32,7 +32,7 @@ rules = (
     (r"\}", 'RC'),
 )
 
-lx = lexer.Lexer(rules)
+lx = lexer.Lexer(lxrules)
 
 lx.input(src)
 
@@ -50,7 +50,4 @@ except lexer.LexerError as e:
     line = src.split("\n")[row]
     sym = src[symno]
 
-    print("error in file", repr(os.path.abspath(infile)) + ", line", row)
-    print("\t", line)
-    print((("~" * (col - 1)) if col > 0 else "") + "^")
-    print("unexpected symbol:", repr(sym))
+    showError(infile, src, int(str(e).strip()), "unexpected symbol")

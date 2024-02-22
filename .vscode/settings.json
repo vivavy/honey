@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.inc": "gas",
+        "type_traits": "cpp"
+    }
+}
