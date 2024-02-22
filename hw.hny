@@ -1,0 +1,6 @@
+import io;
+
+
+fn main(argc: int, argv: array<char>) -> int {
+    print("hello world!");
+};
