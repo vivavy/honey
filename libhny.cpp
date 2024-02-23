@@ -159,7 +159,7 @@ __hny_nil __hny_exception_OutOfBounds(__hny_str description) {
     __hny_print_stderr("error occurred, stack trace:\n");
     for (__hny_str stage; (stage = $stack->$iterate());)
         __hny_print_stderr(__hny_str("    ") + stage + __hny_str("\n"));
-    __hny_print_stderr(__hny_str("OutOfBounds:") + description);
+    __hny_print_stderr(__hny_str("OutOfBounds: ") + description);
 };
 
 
@@ -208,7 +208,7 @@ class __hny_list
         if (this->value == nullptr)
             __hny_exception_OutOfBounds("index out of bounds");
         if (index)
-            return this->next->$getitem(--index);
+            return this->next->$getitem(index - 1);
         return this->value;
     };
 
@@ -222,16 +222,16 @@ class __hny_list
 
     __hny_uint get_length() {
         if (this->value == nullptr)
-            if (this->next)
-                return 1 + this->next->get_length();
-        else if (this->next) return 1;
-        return 0;
+            return 0;
+        if (this->next == nullptr)
+            return 1;
+        return this->next->get_length() + 1;
     }
 
     T $iterate() {
         if (this->iterator >= this->get_length()) {
             this->iterator = 0;  // reset iterator
-            return T();
+            return nullptr;
         };
         return this->$getitem(this->iterator++);
     }
