@@ -23,7 +23,7 @@ class __hny_str {
         this->length = 0;
     }
     __hny_str(const char *c_str) {
-        this->c_str = (char *)malloc(strlen(c_str));
+        this->c_str = new char[strlen(c_str)];
         this->c_str[strlen(c_str) - 1] = 0;
         char c;
         for (int i = 0; (c = c_str[i]); i++) this->c_str[i] = c;
@@ -33,7 +33,7 @@ class __hny_str {
 
     __hny_str operator+(__hny_str other) {
         __hny_str *rvalue = new __hny_str();
-        rvalue->c_str = (char *)malloc(this->length + other.length);
+        rvalue->c_str = new char[this->length + other.length];
         rvalue->length = this->length + other.length;
         rvalue->c_str[this->length + other.length - 1] = 0;
         char c;
