@@ -148,14 +148,14 @@ class __hny_stack
     __hny_uint iterator;
 };
 
-static __hny_stack<__hny_str> *__stack;
+static __hny_stack<__hny_str> *$stack;
 
 __hny_nil __hny_print(__hny_str value) {puts(value.c_str);};
 __hny_nil __hny_print_stderr(__hny_str value) {fputs(value.c_str, stderr);};
 
 __hny_nil __hny_exception_OutOfBounds(__hny_str description) {
     __hny_print_stderr("error occurred, stack trace:\n");
-    for (__hny_str stage; (stage = __stack->$iterate());)
+    for (__hny_str stage; (stage = $stack->$iterate());)
         __hny_print_stderr(__hny_str("    ") + stage + __hny_str("\n"));
     __hny_print_stderr(__hny_str("OutOfBounds:") + description);
 };
