@@ -13,7 +13,9 @@ __hny_int __hny_main(__hny_list<__hny_str> args) {
     $stack->$append("function \"main\"");
 
     $stack->$append("for each loop #1");
-    for(__hny_str arg; !(arg = args.$iterate());) {
+    for(__hny_str arg;;) {
+        arg = args.$iterate();
+        if (!arg) break;
         __hny_print(arg);
     }
     $stack->$pop();

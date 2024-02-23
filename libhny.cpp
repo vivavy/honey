@@ -23,12 +23,17 @@ class __hny_str {
         this->length = 0;
     }
     __hny_str(const char *c_str) {
+        if (c_str == nullptr) {
+            this->c_str = nullptr;
+            this->length = 0;
+            return;
+        }
+
         this->c_str = new char[strlen(c_str)];
         this->c_str[strlen(c_str) - 1] = 0;
         char c;
         for (int i = 0; (c = c_str[i]); i++) this->c_str[i] = c;
-        if (c_str == nullptr) this->length = 0;
-        else this->length = strlen(c_str);
+        this->length = strlen(c_str);
     }
 
     __hny_str operator+(__hny_str other) {
@@ -102,10 +107,7 @@ class __hny_stack
     T $pop() {
         T rvalue;
         if (this->next)
-            if (this->next->next) return this->next->$pop();
-            rvalue = this->next->value;
-            this->next = nullptr;
-            return rvalue;
+            return this->next->$pop();
         if (this->value == nullptr)
             return nullptr;
         rvalue = this->value;
