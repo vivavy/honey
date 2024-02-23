@@ -79,8 +79,8 @@ class __hny_stack
     T value;
     __hny_stack<T> *next;
     __hny_stack(){
-        this->value = (T)0;
-        this->next = (__hny_stack<T>*)0;
+        this->value = nullptr;
+        this->next = nullptr;
         this->iterator = 0;
     };
 

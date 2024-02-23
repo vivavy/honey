@@ -1,4 +1,4 @@
-#include "libhny.cpp"
+#include "libhny.hpp"
 
 __hny_int __hny_main(__hny_list<__hny_str> args);
 
