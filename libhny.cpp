@@ -23,17 +23,15 @@ class __hny_str {
         this->length = 0;
     }
     __hny_str(const char *c_str) {
-        if (c_str == nullptr) {
-            this->c_str = nullptr;
-            this->length = 0;
-            return;
-        }
+        if(!c_str) return;
 
         this->c_str = new char[strlen(c_str)];
         this->c_str[strlen(c_str) - 1] = 0;
+
         char c;
         for (int i = 0; (c = c_str[i]); i++) this->c_str[i] = c;
-        this->length = strlen(c_str);
+        if (c_str == nullptr) this->length = 0;
+        else this->length = strlen(c_str);
     }
 
     __hny_str operator+(__hny_str other) {
@@ -152,8 +150,12 @@ class __hny_stack
 
 static __hny_stack<__hny_str> *$stack;
 
-__hny_nil __hny_print(__hny_str value) {puts(value.c_str);};
-__hny_nil __hny_print_stderr(__hny_str value) {fputs(value.c_str, stderr);};
+__hny_nil __hny_print(__hny_str value) {
+    if(c_str) puts(value.c_str);
+};
+__hny_nil __hny_print_stderr(__hny_str value) {
+    if(c_str) fputs(value.c_str, stderr);
+};
 
 __hny_nil __hny_exception_OutOfBounds(__hny_str description) {
     __hny_print_stderr("error occurred, stack trace:\n");
