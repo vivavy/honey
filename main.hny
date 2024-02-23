@@ -1,0 +1,7 @@
+import io;
+
+
+fn main(argc: int, execp: str) -> int {
+    print("Hello, World!\n");
+    return 0;
+}
