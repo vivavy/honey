@@ -3,149 +3,92 @@
 #include <base.hpp>
 
 namespace hny {
-    template <typename T>
-    class _list : _base {
-        T *value;
-        _list<T> *next;
+
+    template<typename T>
+    class _list {
+        private:
+            struct _list__list__node {
+                T data;
+                _list__list__node* next;
+            };
+
+            _list__list__node* head;
+            int size;
 
         public:
 
-        _list() {
-            this->value = nullptr;
-            this->next = nullptr;
-        };
+            _list() : head(nullptr), size(0) {};
 
-        void __to_c() {
-            rt::_error("IntegrationError").raise("attempt to convert linked list to C type");
-        };
+            void append(T value) {
+                _list__list__node* new_list__list__node = new _list__list__node();
+                new_list__list__node->data = value;
+                new_list__list__node->next = nullptr;
 
-        explicit operator bool() const {
-            return !!this->length();
-        };
+                if (head == nullptr)
+                    head = new_list__list__node;
+                else {
+                    _list__list__node* current = head;
+                    while (current->next != nullptr)
+                        current = current->next;
+                    current->next = new_list__list__node;
+                }
 
-        T __getitem(_uint index) {
-            if (index)
-                if (this->next != nullptr)
-                    return this->next->__getitem(--index);
-                else
-                    rt::_error("IndexError").raise("list index out of range");
-            return *this->value;
-        }
-
-        _uint length() {
-            if (this->next == nullptr)
-                if (this->value == nullptr)
-                    return 0;
-                else
-                    return 1;
-            else
-                return 1 + this->next->length().__to_c();
-        };
-
-        void append(T value) {
-            if (this->next == nullptr) {
-                if (this->value == nullptr) {this->value = &value;return;}
-                this->next = new _list();
-                this->next->value = &value;
-                return;}
-            this->next->append(value);
-        };
-
-        _list operator+(_list other) {
-            _list rv = this->copy();
-            for (uint i = 0; i < other.length(); i++) {
-                rv.append(other.__getitem(_uint(i)));
+                size++;
             }
-            return rv;
-        };
 
-        _list operator-(_list other) {
-            _list *rv = new _list(this->c - other.c);
-            return *rv;
-        };
+            explicit operator bool() const {
+                return this->head != nullptr;
+            };
 
-        _list operator*(_list other) {
-            _list *rv = new _list(this->c * other.c);
-            return *rv;
-        };
+            int length() const {
+                return size;
+            }
 
-        _list operator/(_list other) {
-            _list *rv = new _list(this->c / other.c);
-            return *rv;
-        };
+            T __getitem(_uint index) const {
+                if (index >= 0 && index < size) {
+                    _list__list__node* current = head;
+                    for (int i = 0; i < index.__to_c(); ++i)
+                        current = current->next;
+                    return current->data;
+                }
+                
+                rt::IndexError.raise("list index out of range");
 
-        _list operator++() {
-            _list *rv = new _list(this->c++);
-            return *rv;
-        };
+                return T();
+            }
 
-        _list operator--() {
-            _list *rv = new _list(this->c--);
-            return *rv;
-        };
+            void __remitem(_uint index) {
+                if (index >= 0 && index < size) {
+                    _list__list__node* temp = head;
+                    for (int i = 0; i < index.__to_c(); ++i)
+                        temp = temp->next;
 
-        _list operator<<(_list other) {
-            _list *rv = new _list(this->c << other.c);
-            return *rv;
-        };
+                    _list__list__node* prev = temp->prev;
+                    _list__list__node* next = temp->next;
 
-        _list operator>>(any other) {
-            _list *rv = new _list(this->c >> other.c);
-            return *rv;
-        };
+                    if (temp == head)
+                        head = next;
+                    else
+                        prev->next = next;
 
-        _list operator^(_list other) {
-            _list *rv = new _list(this->c ^ other.c);
-            return *rv;
-        };
+                    if (next != nullptr)
+                        next->prev = prev;
 
-        _bool operator!() {
-            return !this->c;
-        };
+                    delete temp;
+                    --size;
 
-        _list operator~() {
-            _list *rv = new _list(~this->c);
-            return *rv;
-        };
-
-        _bool operator==(_list other) {
-            return this->c == other.c;
-        };
-
-        _bool operator!=(_list other) {
-            return this->c != other.c;
-        };
-
-        _bool operator>(_list other) {
-            return this->c > other.c;
-        };
-
-        _bool operator<(_list other) {
-            return this->c < other.c;
-        };
-
-        _bool operator<=(_list other) {
-            return this->c <= other.c;
-        };
-
-        _bool operator>=(_list other) {
-            return this->c >= other.c;
-        };
-
-        _bool operator&&(_list other) {
-            return this->c && other.c;
-        };
-
-        _bool operator||(_list other) {
-            return this->c || other.c;
-        };
-
-        _list operator&(_list other) {
-            return this->c & other.c;
-        };
-
-        _list operator|(_list other) {
-            return this->c | other.c;
-        };
+                } else rt::IndexError.raise("list index out of range");
+            };
+            
+            T __setitem(_uint index, T value) const {
+                if (index >= 0 && index < size) {
+                    _list__list__node* current = head;
+                    for (int i = 0; i < index.__to_c(); ++i)
+                        current = current->next;
+                    current->data = value;
+                } else {
+                    rt::IndexError.raise("list index out of range");
+                }
+            }
     };
 };

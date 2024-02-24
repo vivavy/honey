@@ -5,7 +5,7 @@
 
 namespace hny {
     template <typename T>
-    class __int : _base {
+    class __int {
         T c;
 
         public:

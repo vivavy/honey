@@ -4,7 +4,7 @@
 #include <string.h>
 
 namespace hny {
-    class _str : _base {
+    class _str {
         char *c;
 
         public:
@@ -25,7 +25,7 @@ namespace hny {
             this->c = new char[c.__to_c()];
         }
 
-        const char *__to_c() {
+        char *__to_c() {
             return this->c;
         };
 

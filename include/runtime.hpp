@@ -44,5 +44,6 @@ namespace hny {
 
         _error TypeError("TypeError");
         _error NullError("NullError");
+        _error IndexError("IndexError");
     };
 };

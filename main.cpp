@@ -1,16 +1,18 @@
 #include <libhny.hpp>
 #include <stdlib/io.hpp>
 
+#include <iostream>
+
+#define LOG(x) (std::cerr << x << '\n');
+
 
 namespace hny {
     _int _main(_list<_str> args) {
         rt::push("function \"main\"");
         
         rt::push("for loop #0");
-
         for (_uint i = 0; i < args.length(); i = i + 1)
             _print(args.__getitem(i) + "\n");
-        
         rt::pop();
 
         rt::pop();

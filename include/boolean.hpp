@@ -3,7 +3,7 @@
 #include <base.hpp>
 
 namespace hny {
-    class _bool : _base {
+    class _bool {
         bool c;
 
         public:
@@ -29,7 +29,7 @@ namespace hny {
         };
 
         _bool operator+(_bool other) {
-            return *this || other;
+            return this->c || other.c;
         };
 
         void operator-(_bool other) {
@@ -37,7 +37,7 @@ namespace hny {
         };
 
         _bool operator*(_bool other) {
-            return *this && other;
+            return this->c && other.c;
         };
 
         void operator/(_bool other) {
@@ -61,7 +61,7 @@ namespace hny {
         };
 
         _bool operator!() {
-            _bool *rv = new _bool(this->c ? 0 : -1);
+            _bool *rv = new _bool(!this->c);
             return *rv;
         };
 
@@ -70,43 +70,43 @@ namespace hny {
         };
 
         _bool operator==(_bool other) {
-            return !(*this ^ other);
+            return !(this->c ^ other.c);
         };
 
         _bool operator!=(_bool other) {
-            return *this ^ other;
+            return this->c ^ other.c;
         };
 
         _bool operator>(_bool other) {
-            return *this && !other;
+            return this->c && !other.c;
         };
 
         _bool operator<(_bool other) {
-            return !*this && other;
+            return !this->c && other.c;
         };
 
         _bool operator<=(_bool other) {
-            return *this == other || *this < other;
+            return this->c == other.c || this->c < other.c;
         };
 
         _bool operator>=(_bool other) {
-            return *this == other || *this > other;
+            return this->c == other.c || this->c > other.c;
         };
 
         _bool operator&&(_bool other) {
-            return *this && other;
+            return this->c && other.c;
         };
 
         _bool operator||(_bool other) {
-            return *this || other;
+            return this->c || other.c;
         };
 
         _bool operator&(_bool other) {
-            return *this * other;
+            return this->c * other.c;
         };
 
         _bool operator|(_bool other) {
-            return *this + other;
+            return this->c + other.c;
         };
     };
 };
