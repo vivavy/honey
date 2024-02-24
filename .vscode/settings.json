@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.inc": "gas",
-        "type_traits": "cpp",
-        "cstdint": "cpp",
-        "strings.h": "c"
-    }
-}
