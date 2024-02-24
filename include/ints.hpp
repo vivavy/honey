@@ -18,10 +18,6 @@ namespace hny {
             this->c = c ? -1 : 0;
         };
 
-        __int(bool c) {
-            this->c = c ? 1 : 0;
-        };
-
         bool __to_c() {
             return this->c;
         };

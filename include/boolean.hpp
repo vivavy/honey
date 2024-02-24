@@ -4,28 +4,28 @@
 
 namespace hny {
     class _bool : _base {
-        uint8_t c;
+        bool c;
 
         public:
 
         _bool() {
-            this->c = 0;
+            this->c = false;
         };
 
         _bool(int c) {
-            this->c = c ? -1 : 0;
+            this->c = c ? true : false;
         };
 
         _bool(bool c) {
-            this->c = c ? -1 : 0;
+            this->c = c;
         };
 
         bool __to_c() {
-            return !!this->c;
+            return this->c;
         };
 
         explicit operator bool() const {
-            return !!this->c;
+            return this->c;
         };
 
         _bool operator+(_bool other) {
