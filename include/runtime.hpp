@@ -27,6 +27,21 @@ namespace hny {
             };
         };
 
+        class _warning {
+            const char *name;
+            public:
+            _warning(const char *name) {
+                this->name = name;
+            }
+
+            void raise(const char *desc) {
+                std::cerr << "Warning:\n";
+                for (int i = 0; i < call_stack_length; i++)
+                    std::cerr << '\t' << call_stack[i] << '\n';
+                std::cerr << this->name << ": " << desc << '\n' << std::endl;
+            };
+        };
+
         _error TypeError("TypeError");
         _error NullError("NullError");
     };

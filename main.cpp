@@ -5,7 +5,9 @@
 namespace hny {
     hny::_int _main(hny::_int argc, hny::_str execp) {
         rt::push("function \"main\"");
-        _print(_str("Hello, ") + "World!\n");
+        _str output("Hello!");
+        output.__setitem(2U, "Nigger");
+        _print(output + "\n");
         rt::pop();
         return 0;
     };

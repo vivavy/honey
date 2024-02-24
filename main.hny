@@ -2,6 +2,8 @@ import io;
 
 
 fn main(argc: int, execp: str) -> int {
-    print("Hello, " + "World!\n");
+    output: str = "Hello";
+    output[2] = "Nigger";
+    print(output + "\n");
     return 0;
 }

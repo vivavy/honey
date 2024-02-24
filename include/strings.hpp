@@ -126,5 +126,17 @@ namespace hny {
         void operator|(_str other) {
             rt::TypeError.raise("invalid operator \"|\" for type <str>");
         };
+
+        _str __getitem(_uint index) {
+            _str *rv = new _str(_uint(1U));
+            rv->c[0] = this->c[index.__to_c()];
+            return *rv;
+        };
+
+        void __setitem(_uint index, _str value) {
+            if (strlen(value.c) != 1)
+                rt::_error("ValueError").raise("value for str setitem must be 1-length");
+            this->c[index.__to_c()+1] = value.c[0];
+        }
     };
 };
