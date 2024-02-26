@@ -1,12 +1,12 @@
 #pragma once
 
-#include <base.hpp>
+#include <base.h>
 
 namespace hny {
     class _bool {
-        bool c;
-
         public:
+
+        bool c;
 
         _bool() {
             this->c = false;

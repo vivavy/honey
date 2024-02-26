@@ -1,9 +1,7 @@
 import io;
 
 
-fn main(argc: int, execp: str) -> int {
-    output: str = "Hello";
-    output[2] = "Nigger";
-    print(output + "\n");
+fn main(args: list<str>) -> int {
+    io::println("Hello, World!");
     return 0;
-}
+};

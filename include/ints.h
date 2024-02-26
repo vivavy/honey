@@ -1,21 +1,21 @@
 #pragma once
 
-#include <base.hpp>
-#include <cstdint>
+#include <base.h>
+#include <stdint.h>
 
 namespace hny {
     template <typename T>
     class __int {
-        T c;
-
         public:
+
+        T c;
 
         __int() {
             this->c = 0;
         };
 
         __int(T c) {
-            this->c = c ? -1 : 0;
+            this->c = c;
         };
 
         bool __to_c() {
@@ -122,16 +122,14 @@ namespace hny {
     };
 
     typedef __int<uint> _uint;
-    typedef __int<uint8_t> _u8;
-    typedef __int<uint16_t> _u16;
-    typedef __int<uint32_t> _u32;
+    typedef __int<u_char> _u8;
+    typedef __int<ushort> _u16;
+    typedef __int<ulong> _u32;
     typedef __int<uint64_t> _u64;
-    typedef __int<__uint128_t> _u128;
 
     typedef __int<int> _int;
-    typedef __int<int8_t> _i8;
-    typedef __int<int16_t> _i16;
-    typedef __int<int32_t> _i32;
-    typedef __int<int64_t> _i64;
-    typedef __int<__int128_t> _i128;
+    typedef __int<char> _i8;
+    typedef __int<short> _i16;
+    typedef __int<long> _i32;
+    typedef __int<long long> _i64;
 };
