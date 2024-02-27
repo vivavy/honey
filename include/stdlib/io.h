@@ -2,6 +2,6 @@
 
 #include <stdio.h>
 
-inline void $print($str s) {
+void $print($str s) {
     printf("%s", s);
 }
